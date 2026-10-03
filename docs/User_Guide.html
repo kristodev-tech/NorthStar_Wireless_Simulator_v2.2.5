@@ -1,0 +1,132 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>NorthStar Wireless Simulator User Guide</title><style>body{max-width:940px;margin:40px auto;padding:0 22px;color:#222;background:#fff;font:16px/1.65 Segoe UI,Arial,sans-serif}h1,h2{color:#8c1026}h1{border-bottom:3px solid #b61d38;padding-bottom:15px}table{border-collapse:collapse;width:100%;margin:20px 0}th,td{border:1px solid #ccc;text-align:left;padding:10px}th{background:#f2f3f7}code{background:#f0f1f4;padding:2px 4px}img{width:110px}a{color:#9b1628}@media print{body{font-size:11pt;margin:0}h2{break-after:avoid}tr{break-inside:avoid}}</style><body><h1>NorthStar Wireless Simulator</h1>
+<h2>User Guide • Version 2.2.5</h2>
+<p>NorthStar Software Works</p>
+<p>This guide describes the current application. The included legacy 1.2 Word document is retained for reference and does not describe the new radio options or fixes.</p>
+<h2>Guided workspace — start here</h2>
+<p>Use the stage selector at the top of the right panel to choose <strong>Network &amp; devices</strong>, <strong>Map &amp; obstacles</strong>, <strong>Coverage &amp; calibration</strong>, <strong>Routes &amp; placement</strong>, or <strong>Review, save &amp; export</strong>. Back/Next move between stages; you can jump directly to any stage. The map stays available. Hide <strong>Show step-by-step hints</strong> when you prefer direct editing.</p>
+<p>The workspace shows device/wall counts and whether the project has a saved file or unsaved changes. It does not mark calibration or radio accuracy as complete automatically. Controls needing a selection are disabled until you select the appropriate device(s). Moving away from Map &amp; obstacles turns obstacle drawing off to avoid accidental walls.</p>
+<p><strong>Start Blank Project</strong> opens a small setup dialog for the radio family, starting profile and map scale. Cancel leaves your project unchanged; creating another project first handles any unsaved work. The new project starts with no devices, the selected radio preset and fresh map/simulation settings.</p>
+<p>Checkboxes use an explicit empty box when off and a filled cyan box with a white tick when on. Disabled checked states use a muted tick. Obstacle drawing buttons also show a filled pressed state while active.</p>
+<p>In the final stage, <strong>Review Link Margins</strong> summarizes displayed link pairs in both directions using stable values, identifies margins below sensitivity or below 6 dB, and shows scale/loss assumptions. A changed layout invalidates the review so old results cannot appear current. This review concerns the displayed pairs; it does not certify a real installation.</p>
+<h2>1. What the simulator does</h2>
+<p>Place wireless devices on a map, draw walls, then explore estimated signal strength and receiver margin. A heatmap shows coverage from a selected transmitter. Routing highlights abstract paths through the placed devices, and router suggestions search for a position with a stronger weakest link.</p>
+<p>These are estimates based on a simplified model. The application does not discover nearby Wi-Fi, pair Bluetooth devices, use your computer's radio, or communicate with real scales. It runs offline once installed.</p>
+<h2>2. Launching</h2>
+<p>For the source package, first run <code>01_Setup_Environment.bat</code>, then <code>02_Run_App.bat</code>. The setup installs all dependencies into the project's private <code>.venv</code>. You need Python 3.11, 3.12 or 3.13 on Windows. Setup requires internet access; simulation does not.</p>
+<p>For a built installer, run the setup EXE, review and accept the terms, and choose whether to create a desktop shortcut. The installed app does not require a separate Python installation. You will also see application terms on its first launch.</p>
+<p>The main window contains a map on the left and five selectable planning stages in a scrollable controls area on the right. Drag the divider to change their relative widths. If controls extend below the window, scroll the right panel. Resizing the window preserves access to the controls. Use View → Fit Layout (Ctrl+0) to see the entire layout, or Actual Scale (Ctrl+1) to reset the view. Press F1 for the original quick-start help; read this guide for v2 features.</p>
+<h2>3. Start with a demo or a blank project</h2>
+<p>Choose a family under Network / Demo and press <strong>Load Demo</strong>. The simulator replaces the current scene with three devices and a drywall obstacle. It prompts you to save unsaved work before replacing it.</p>
+<p>For a blank layout, use <strong>File → New Project</strong> or <strong>Start Blank Project</strong> in stage 1. Choose the family, starting radio profile and scale, then create the project. Choose a device label and press <strong>Add Node</strong>. <strong>New / Clear</strong> on the map also clears a layout after handling unsaved work. The first node locks the project to that radio family. This prevents incompatible technologies from appearing connected. Start a new project to use a different family.</p>
+<p>Example layouts are also included in <code>examples/</code>. Open one using <strong>File → Load Project</strong>. Wi-Fi 2.4, 5 and 6 GHz are separate planning families; BLE 1M, 2M and Coded profiles share a family under the assumption that the endpoints support the PHY used.</p>
+<h2>4. Place and label devices</h2>
+<p>Drag a device to reposition it. Ctrl+click lets you select multiple devices. Select one device before changing its label or radio preset. Node additions, moves, deletion, radio calibration and label changes support Undo/Redo from the Edit menu or Ctrl+Z/Ctrl+Y.</p>
+<p>Device labels include Scale, Router, Gateway, Sensor, Repeater, Access Point, Laptop, Phone, Bluetooth Peripheral, BLE Beacon, Headset and IoT Device. These names help identify equipment. They do not implement the device's protocol behavior or decide whether it is physically capable of forwarding packets.</p>
+<p><strong>Delete Selected</strong> removes selected devices or obstacles. Clear removes the complete layout after handling unsaved work.</p>
+<h2>5. Map scale and walls</h2>
+<p><strong>Pixels per meter</strong> determines how screen distance converts to physical distance. At 10 pixels/meter, 100 pixels represents 10 meters. Use <strong>Grid spacing (m)</strong> to set the visible grid. Show grid and Snap to grid control display and movement snapping.</p>
+<p>Choose an obstacle material and enable <strong>Draw Obstacles</strong>. Click and drag a rectangle on the map. Disable drawing when finished. Select an obstacle to change its material and <strong>Thickness (x)</strong> multiplier. Thickness is a multiplier of the preset material loss, not a measured thickness in centimeters. Moving, deleting or changing obstacles affects link estimates.</p>
+<p>The model weights a corner graze less than a full crossing. Default attenuation values are approximate and are not frequency-dependent construction measurements. Calibrate against your actual wall and device measurements.</p>
+<h2>6. Calibrate an individual radio</h2>
+<p>Select one device and press <strong>Edit Selected Radio Parameters</strong> in Simulation / Calibration.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TX power, dBm</td>
+<td>Transmitter output used by the model; antenna gains are not separate settings</td>
+</tr>
+<tr>
+<td>Sensitivity, dBm</td>
+<td>Receiver threshold at the chosen operating mode; more negative means a weaker signal can be received</td>
+</tr>
+<tr>
+<td>Frequency, MHz</td>
+<td>Nominal band information; changing this alone does not coordinate channels or change the reference loss</td>
+</tr>
+<tr>
+<td>Reference loss at 1 m, dB</td>
+<td>Model path loss at the reference distance</td>
+</tr>
+<tr>
+<td>Path loss exponent</td>
+<td>How quickly loss increases with distance; larger values decay faster</td>
+</tr>
+<tr>
+<td>Fading standard deviation, dB</td>
+<td>Amount of random variation in animated link estimates</td>
+</tr>
+</tbody>
+</table>
+<p>The button <strong>Use Free-Space Reference Loss for Frequency</strong> recalculates the reference loss from the chosen frequency. This is explicit so an experimentally calibrated reference loss is not accidentally replaced. Save applies to that device only; shared preset defaults are not modified. Cancel discards the dialog edits. Radio edits can be undone and are stored in project JSON.</p>
+<p>Use device data sheets and measurements at the intended PHY/data rate. A sensitivity value at one rate does not imply the same sensitivity at every rate. The Bluetooth coded preset is illustrative, not a guaranteed range improvement. The LoRa preset does not model spreading factors, coding rates, airtime or regional rules.</p>
+<h2>7. Stable mode and additional loss</h2>
+<p>Uncheck <strong>Animate random fading</strong> for repeatable live link readings. Heatmaps and routing always use deterministic values. With fading enabled, link readings fluctuate around the model's average; those fluctuations are not recordings of physical interference.</p>
+<p><strong>Additional loss</strong> adds a common loss allowance to links, heatmaps and router scoring. It can represent a conservative planning allowance for unknown conditions. It does not compute channel interference, noise floor, SINR or competing traffic.</p>
+<h2>8. Read link metrics</h2>
+<p>Ctrl+click two devices to focus their link. The metrics panel represents a directed A → B estimate in the simulator's current link ordering. TX comes from A and receiver sensitivity comes from B. Reverse direction may have a different margin. Hover a link to see its direction, RSSI, margin, estimated success, distance and wall loss.</p>
+<ul>
+<li><strong>RSSI:</strong> estimated received power in dBm.</li>
+<li><strong>Margin:</strong> RSSI minus the receiver sensitivity; positive values are above the threshold.</li>
+<li><strong>Success estimate:</strong> a heuristic curve mapping margin to a percentage, not a measured packet delivery rate.</li>
+<li><strong>Retries/latency estimates:</strong> generic formulas for comparison, not protocol timing guarantees.</li>
+</ul>
+<p>Link colors communicate estimated quality. A visible link is not proof of a real association or a viable route.</p>
+<p>Under Links, choose All-to-All or Nearest Neighbor and set K. This changes which links are drawn. Routing considers all viable directed pairs independently of the drawn-link mode. For nearest-neighbor display, repositioning nodes is followed on the next simulation refresh.</p>
+<h2>9. Use the heatmap</h2>
+<p>Enable <strong>Show Heatmap</strong>, choose its transmitter, and choose RSSI, Margin or Success. <strong>Use Selected Node as TX</strong> selects the currently selected device. The heatmap assumes a receiver with the transmitter profile's sensitivity at each map point.</p>
+<p>The heatmap refreshes after a meaningful change, including device movement, wall thickness, radio calibration, map scale or additional loss. Repeated unchanged updates reuse the existing image. Moving the pointer over the map updates the cursor readout.</p>
+<p>Green/red heatmap colors represent the configured metric, not an exact measured boundary. The RSSI color legend uses a fixed -110 to -40 dBm range; values outside it saturate. Use margin when comparing radios with very different sensitivity, such as the illustrative LoRa preset.</p>
+<h2>10. Explore routes and router placement</h2>
+<p>Enable multi-hop routing, choose different Source and Destination devices, and press <strong>Compute Route</strong>. You can also select two devices and use <strong>Use Selected (2 nodes)</strong>.</p>
+<ul>
+<li><strong>Max-Min Margin:</strong> maximize the weakest hop's receiver margin.</li>
+<li><strong>Min Total Loss:</strong> minimize the total modeled path loss across the chosen hops.</li>
+</ul>
+<p>Hops below receiver sensitivity are excluded. The report shows the path, number of hops, bottleneck margin, and heuristic end-to-end success/latency. If no route is found, move devices closer, reduce measured loss assumptions if justified, or add a genuinely relay-capable device.</p>
+<p>These paths are abstract graph results. Bluetooth Classic and ordinary BLE nodes do not automatically form mesh networks; Wi-Fi stations do not automatically relay between each other. The graph currently allows any placed node to act as an intermediate point. Interpret a suggested path only where real hardware and network configuration support each hop.</p>
+<p><strong>Suggest Router Placement</strong> searches a coarse map grid for a position improving the weakest link while avoiding obstacles. Accept adds a router node; Reject dismisses the marker. It is a planning suggestion, not an optimal-layout proof or a protocol-aware deployment plan.</p>
+<h2>11. Save, open and recover</h2>
+<p>Use <strong>File → Save Project</strong> (Ctrl+S) to update the current file. The first save opens a file chooser. <strong>Save Project As</strong> always opens the chooser so you can save a separate copy. The Save button in stage 5 follows the same rules. JSON contains the devices, actual edited radio values, obstacles, map settings, link display, heatmap, simulation allowance and routing choices. Explicit saves use an atomic replacement so a failed write preserves the previous file.</p>
+<p>The title displays an asterisk for unsaved work. Changes to saved simulation/view settings also mark the project dirty. Project replacement prompts you to save, discard or cancel. Closing a modified project offers saving; canceling or a failed save keeps the app open.</p>
+<p>Every 30 seconds, modified nonempty projects are saved to a per-user recovery file. If it exists at startup, the app offers recovery. Save a recovered layout to a normal JSON file. A successful explicit save removes the stale recovery file. Recovery is a convenience, not a substitute for your own backups.</p>
+<p>Malformed projects, unsupported schema versions, unknown presets, nonfinite numbers and mixed radio families are rejected before replacing the current layout. Up to 100 devices and 100 obstacles are accepted as a guardrail; practical performance depends on layout size and hardware. Keep exploratory layouts small and use nearest-neighbor display for larger examples.</p>
+<h2>12. Export and share results</h2>
+<p><strong>Export Snapshot PNG</strong> saves the map image. <strong>Export XLSX (All Data)</strong> saves the simulator's original engineering workbook with node profiles, obstacles, links, routing and heatmap data where enabled. Open it in Excel or another spreadsheet viewer.</p>
+<p>Excel exports use one deterministic snapshot, independent of animated fading, and use the selected physical map scale. The Summary sheet records scale, extra loss, heatmap and routing choices. The Nodes sheet includes reference loss, exponent and fading settings; Obstacles includes the thickness multiplier. Links and Warnings use the same computed values. The map may show an animated moment while the workbook shows stable values; turn fading off to compare them directly. Keep the JSON project alongside exported images and workbooks so the assumptions can be reviewed.</p>
+<h2>13. Formula and assumptions</h2>
+<p>The link budget is:</p>
+<p><code>RSSI = TX − PL₀ − 10 × n × log10(distance_m) − wall_loss − additional_loss + fading</code></p>
+<p>Reference distance is 1 m. Modeled distance is at least 0.5 m. The free-space reference estimate is <code>PL₀ = 20 × log10(frequency_MHz) − 27.55</code>.</p>
+<p>The generic success curve is <code>100 × clamp((margin + 10) / 25, 0, 1)</code>. Retries are <code>clamp((100 − success) / 18, 0, 6)</code>. Latency is <code>8 + 0.4 × distance_m + 6 × retries</code>, in milliseconds. These heuristic curves are the same across technologies. They are useful for demonstrations but do not imply physical packet statistics. Routes add a generic 4 ms per-hop allowance.</p>
+<p>Multipath, antenna patterns, terrain elevation, 3D geometry, channel contention, throughput, Wi-Fi association, Bluetooth pairing, Bluetooth hopping, BLE advertising timing, LoRa airtime and spectral interference are outside this version's model. Material losses do not change with frequency. Use measured calibration and field tests before making equipment or installation decisions.</p>
+<h2>14. Local data, branding and support</h2>
+<p>Projects are stored wherever you choose. Logs and recovery files are in the Qt per-user AppData location under NorthStar Software Works / NorthStar Wireless Simulator, with log files under <code>logs</code>. Windows settings use the NorthStar Software Works / Wireless Simulator registry namespace. Uninstalling the app does not intentionally delete your project files or per-user recovery/settings.</p>
+<p>The package supplies an optional wallpaper and 800×800 product image. The installer does not change your Windows wallpaper automatically. Branding assets were created with AI assistance.</p>
+<p>If the source app does not launch, rerun setup, then launch with <code>02_Run_App.bat</code> to keep error messages visible. If tests say pytest or Ruff is missing, use <code>03_Quality_Checks.bat</code> rather than the global Python interpreter. For a compiled build, keep the complete PyInstaller distribution together; the EXE depends on its neighboring <code>_internal</code> folder. Review application logs for errors.</p>
+<p>Support: https://northstarsoftwareworks.com</p>
+<h2>Module experiments and project names (2.2.5)</h2>
+<p>Choose Wi-Fi Module, Bluetooth Module, BLE Module, Zigbee Module, LoRa Module,
+RF Module, Development Board, Transceiver, Test Node or Custom Device in Device type.
+Then choose the radio profile for your experiment. Device type is a label; it
+never selects the protocol or radio parameters. Existing single-family and relay
+model assumptions still apply.</p>
+<p>Enter an optional New device name before Add Node (for example <code>Roof prototype A</code>).
+Leave it empty for automatic numbered names. Select one device and use Rename
+Selected Device to change its name. Names must be unique, contain 1–120 characters,
+and have no line breaks. Renaming supports Undo/Redo and preserves selected heatmap
+transmitters and route endpoints. Changing device type keeps an explicit custom
+name. Names are included in project saves, recovery, map labels and exports.</p>
+<p>Obstacle type now includes wood, brick, reinforced concrete, metal doors, office
+partitions, furniture, racks, machinery, people, foliage and water tanks. Draw a
+rectangle representing the object; use Thickness to scale its modeled loss. These
+are illustrative, frequency-independent presets, not measured material data or
+physical body/object models. Calibrate against measurements for your setup.</p>
+<p>In narrow panels, labels appear above their fields so larger text fits without horizontal scrolling. Longer stages remain vertically scrollable. Select one device and choose Edit Selected Radio… to adjust its parameters.</p>
+<p>Button and checkbox captions wrap when needed, and their height grows to keep the text visible. Click anywhere on a checkbox caption to toggle it. Dropdowns use compact widths; open the list or hover to read longer options.</p>
+<p>The coverage legend can grow vertically when its labels wrap, so larger fonts do not widen the planning panel. Build-test diagnostics are described in Windows_Validation.md.</p></body></html>

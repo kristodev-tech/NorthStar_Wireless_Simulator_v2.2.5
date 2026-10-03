@@ -1,0 +1,17 @@
+NorthStar Wireless Simulator 2.2.5 — End User Terms
+Copyright 2026 NorthStar Software Works
+
+By selecting I Accept, you agree to these terms.
+
+You may install and use this application for personal or internal business planning and training. These terms do not grant permission to redistribute or resell NorthStar branding or packaged builds. Source access is supplied for inspection and modification for your own use; it does not by itself grant a redistribution license. Any separate written license or purchase agreement applies in addition to these terms.
+
+This application simulates wireless link budgets using simplified assumptions. Preset values and success, latency, retries, and routing results are illustrative. It does not measure your equipment, guarantee range or reliability, emulate complete radio protocols, certify regulatory compliance, or replace a site survey and device testing. You are responsible for validating planning results before relying on them.
+
+The application is provided as is, without promises of fitness for a particular purpose or uninterrupted operation. To the extent permitted by applicable law, NorthStar Software Works is not responsible for losses arising from use of simulated results. Applicable consumer rights remain unaffected.
+
+Projects, settings and logs are stored locally. The application does not scan, pair, transmit to or control physical wireless devices, or upload project contents. Installing dependencies when running the source build requires internet access; the installed simulator operates offline.
+
+Third-party components retain their own licenses. These terms do not restrict rights granted by Qt/PySide6, openpyxl, Python or other third-party licenses. See THIRD_PARTY_NOTICES.md. Generated branding was created with AI assistance.
+
+Support: https://northstarsoftwareworks.com
+Terms revision: 2.2.5

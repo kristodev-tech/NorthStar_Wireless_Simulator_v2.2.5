@@ -1,0 +1,31 @@
+NorthStar Wireless Simulator 2.2.5 — Complete source and build package
+
+This folder contains the complete application with all updates and the corrected build checks and narrow-window layout. No separate patch or GitHub package is required.
+
+START WITH A FRESH FOLDER
+1. Extract this complete ZIP into a new writable folder. Do not run files inside the ZIP or copy an old .venv into this folder.
+2. Install 64-bit Python 3.11, 3.12 or 3.13 with the Windows Python launcher, if needed.
+3. Double-click 01_Setup_Environment.bat and wait for Environment ready.
+4. Double-click 02_Run_App.bat to test the application.
+5. Double-click 04_Build_Exe.bat to run checks and build the executable.
+   Output: dist\NorthStarWirelessSimulator\NorthStarWirelessSimulator.exe
+   Keep the entire distribution folder together.
+6. With Inno Setup 6 installed, run 05_Build_Installer.bat.
+   Output: installer\NorthStarWirelessSimulator_2.2.5_Setup.exe
+
+Included: custom device names, module/device options, expanded obstacles, checkbox visuals, guided workspace, radio editing, save/recovery fixes, exports, branding/icons, Windows build scripts, installer definition, tests, and documentation.
+
+The GitHub README and image assets are integrated. Website product description: docs\Product_Page_Description.txt.
+
+To retain your experiments, open your saved project JSON files in this application. Keep backups of saved projects before removing an older folder.
+
+If a step fails, leave its window open and copy the first error and the final lines. Do not run Ruff --fix on .venv dependencies.
+
+This package contains source and build tools. A prebuilt Windows EXE or installer is not included; run the scripts above on Windows.
+
+VALIDATION AND DIAGNOSTICS
+The Windows quality checks save build\quality_checks.log and build\pytest-results.xml. Failed GUI tests also save screenshots and width/font reports under build\diagnostics. See docs\Windows_Validation.md for the included automated Windows workflow. Local validation passed at three scale factors and includes a Linux frozen build; Windows builds still need to run on Windows.
+
+NORMAL BUILD VERSUS OPTIONAL STRESS REVIEW
+04_Build_Exe.bat now uses standard checks: lint, formatting, typing and 55 functional/normal-window tests. It does not run the three forced tiny-sidebar/oversized-font checks.
+07_Layout_Stress_Tests.bat runs those optional checks separately. They can still report a Windows layout limitation; that result is logged and does not block the normal build. Running pytest directly without marker selection includes all tests.

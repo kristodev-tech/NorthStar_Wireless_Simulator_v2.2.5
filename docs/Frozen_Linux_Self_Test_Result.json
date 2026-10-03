@@ -1,0 +1,18 @@
+{
+  "version": "2.2.5",
+  "passed": true,
+  "checks": [
+    "bundled assets",
+    "XBee (Zigbee)",
+    "RM024 (FHSS)",
+    "Wi-Fi 2.4 GHz",
+    "Wi-Fi 5 GHz",
+    "Wi-Fi 6 GHz",
+    "Bluetooth Classic",
+    "Bluetooth Low Energy",
+    "Sub-GHz FSK 868 MHz",
+    "Sub-GHz FSK 915 MHz",
+    "LoRa 915 MHz",
+    "guided layouts at 1024 and 1366 pixels"
+  ]
+}

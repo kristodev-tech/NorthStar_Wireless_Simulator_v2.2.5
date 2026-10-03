@@ -1,0 +1,95 @@
+{
+  "version": 2,
+  "simulation": {
+    "extra_loss_db": 0.0,
+    "live_fading": true
+  },
+  "network_tech": "ZIGBEE",
+  "scale": {
+    "px_per_meter": 10.0,
+    "grid_spacing_m": 5.0,
+    "show_grid": true,
+    "snap_to_grid": false
+  },
+  "links": {
+    "mode": "All-to-All",
+    "nn_k": 2
+  },
+  "heatmap": {
+    "show": false,
+    "mode": "RSSI (dBm)",
+    "tx": "Gateway1"
+  },
+  "routing": {
+    "enabled": false,
+    "mode": "Best Path (Max-Min Margin)",
+    "source": "Gateway1",
+    "destination": "Sensor1"
+  },
+  "nodes": [
+    {
+      "name": "Gateway1",
+      "base_label": "Gateway",
+      "type_number": 1,
+      "profile_key": "XBee (Zigbee-ish)",
+      "radio": {
+        "name": "XBee (Zigbee-ish)",
+        "tech": "ZIGBEE",
+        "tx_dbm": 5.0,
+        "sens_dbm": -100.0,
+        "freq_mhz": 2400.0,
+        "pl_d0_db": 40.0,
+        "n": 2.3,
+        "noise_sigma_db": 2.5
+      },
+      "x": 200.0,
+      "y": 300.0
+    },
+    {
+      "name": "Sensor1",
+      "base_label": "Sensor",
+      "type_number": 1,
+      "profile_key": "XBee (Zigbee-ish)",
+      "radio": {
+        "name": "XBee (Zigbee-ish)",
+        "tech": "ZIGBEE",
+        "tx_dbm": 5.0,
+        "sens_dbm": -100.0,
+        "freq_mhz": 2400.0,
+        "pl_d0_db": 40.0,
+        "n": 2.3,
+        "noise_sigma_db": 2.5
+      },
+      "x": 520.0,
+      "y": 270.0
+    },
+    {
+      "name": "Router1",
+      "base_label": "Router",
+      "type_number": 1,
+      "profile_key": "XBee (Zigbee-ish)",
+      "radio": {
+        "name": "XBee (Zigbee-ish)",
+        "tech": "ZIGBEE",
+        "tx_dbm": 5.0,
+        "sens_dbm": -100.0,
+        "freq_mhz": 2400.0,
+        "pl_d0_db": 40.0,
+        "n": 2.3,
+        "noise_sigma_db": 2.5
+      },
+      "x": 820.0,
+      "y": 380.0
+    }
+  ],
+  "obstacles": [
+    {
+      "material": "Drywall",
+      "thickness": 1.0,
+      "x": 390.0,
+      "y": 200.0,
+      "w": 140.0,
+      "h": 220.0
+    }
+  ]
+}

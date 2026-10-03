@@ -1,0 +1,15 @@
+NorthStar Wireless Simulator
+
+Plan, experiment, and visualize your wireless projects with NorthStar Wireless Simulator, a subscription-free Windows desktop application from NorthStar Software Works.
+
+Place devices or modules on an interactive map, give them names that match your real project, and explore how distance, radio settings, and obstacles affect estimated signal strength and coverage. Choose from Wi-Fi, Bluetooth, BLE, Zigbee, sub-GHz FSK, RM024/FHSS, and illustrative LoRa presets, with device types ranging from sensors and gateways to standalone modules and development boards.
+
+A guided workspace makes it easy to build a layout, add walls, furniture, machinery, or other obstacles, view coverage heatmaps, and compare link margins and abstract routing options. Adjust individual radio parameters, experiment with suggested router placement, save your projects, and export map images or detailed Excel snapshots.
+
+The Windows installer lets you get started without setting up Python. The simulator operates locally and works offline during normal use. Source code is also provided for inspection and personal modification under the included terms.
+
+Designed for learning, prototype experiments, and early planning. Simulation results are illustrative estimates and should be checked against real equipment and site measurements.
+
+Every purchase supports my continued development, software improvements, and equipment maintenance. Thank you for supporting independent software development.
+
+— Kristopher Sorensen, NorthStar Software Works
